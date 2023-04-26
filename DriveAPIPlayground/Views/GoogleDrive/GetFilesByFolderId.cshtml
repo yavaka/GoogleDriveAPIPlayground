@@ -1,0 +1,43 @@
+﻿@using DriveAPIPlayground.Controllers
+@using DriveAPIPlayground.ServiceModels
+
+@model IEnumerable<DriveFileServiceModel>
+
+@{
+    ViewData["Title"] = "Files";
+}
+
+<h1>Files with Extensions</h1>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <form method="post" enctype="multipart/form-data" action="UploadFileToFolder">
+                <div class="form-group">
+                    <label for="file">Choose file to upload:</label>
+                    <input type="file" class="form-control-file" id="file" name="file">
+                </div>
+                <div class="form-group">
+                    <label for="folderIdInput">Folder ID:</label>
+                    <input type="text" class="form-control" id="folderId" name="folderId" value="1DjUwQVX2G7Oes_P7weigx4g3AMjBVWvx">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            @foreach (var file in Model)
+            {
+                <p>
+                    <a type="button" onclick="location.href='@Url.Action(nameof(GoogleDriveController.DownloadFileById), "GoogleDrive", new { fileId = file.Id })'">@file.Name</a>
+                </p>
+            }
+        </div>
+    </div>
+</div>

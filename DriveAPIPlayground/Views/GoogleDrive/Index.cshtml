@@ -1,0 +1,21 @@
+﻿@using DriveAPIPlayground.Controllers
+@model Dictionary<string, string>
+
+@{
+    ViewData["Title"] = "Google Drive Files";
+}
+
+<h1>DriveFileList</h1>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-3">
+            @foreach (var file in Model)
+            {
+                <a type="button" onclick="location.href='@Url.Action(nameof(GoogleDriveController.GetFilesByFolderId), "GoogleDrive", new { folderId = file.Key })'">@file.Value</a>
+            }
+        </div>
+    </div>
+</div>
